@@ -21,14 +21,22 @@ namespace Eserciziofrazioni
         {
             Fraction f1 = Fraction.Parse(textBox1.Text);
             Fraction f2 = Fraction.Parse(textBox2.Text);
-            risultato1.Text = f1.Somma(f2).ToString();
+            risultato1.Text = (f1 + f2).ToString();
             textBox1.Text = f1.ToString();
             textBox2.Text = f2.ToString();
         }
 
         private void aggiungi_Click(object sender, EventArgs e)
         {
+            Fraction f;
+            if(!Fraction.TryParse(textBox3.Text, out f))
+            {
+                MessageBox.Show("Frazione errata");
+            }
+            else
+            {
             lst.Items.Add(Fraction.Parse(textBox3.Text));
+            }
             textBox3.Clear();
         }
 
@@ -45,7 +53,7 @@ namespace Eserciziofrazioni
             Fraction fSomma = new Fraction(0, 1);
             foreach(Fraction f in lst.Items)
             {
-                fSomma = f.Somma(fSomma);
+                fSomma += f;
             }
             risultato2.Text = fSomma.ToString();
         }
