@@ -75,6 +75,7 @@ namespace Eserciziofrazioni
                    D == fraction.D;
         }
 
+        //TryParse
         public static bool TryParse(string s, out Fraction v)
         {
             String[] parts = s.Split('/');
