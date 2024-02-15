@@ -13,6 +13,12 @@ namespace Eserciziofrazioni
         {
             Semplifica(ref n, ref d);
 
+            if (d < 0)
+            {
+                d = -d;
+                n = -n;
+            }
+
             N = n;
             D = d;
         }
@@ -35,26 +41,7 @@ namespace Eserciziofrazioni
             return a;
         }
 
-        public Fraction Somma(Fraction other)
-        {
-            return new Fraction(this.N * other.D + this.D * other.N, this.D * other.D);
-        }
-
-        public Fraction Sottrai(Fraction other)
-        {
-            return new Fraction(this.N * other.D - this.D * other.N, this.D * other.D);
-        }
-
-        public Fraction Moltiplica(Fraction other)
-        {
-            return new Fraction(this.N * other.N, this.D * other.D);
-        }
-
-        public Fraction Dividi(Fraction other)
-        {
-            return new Fraction(this.N * other.D, this.D * other.N);
-        }
-
+        
 
         public override string ToString()
         {
@@ -68,11 +55,25 @@ namespace Eserciziofrazioni
             return new Fraction(int.Parse(parts[0]), int.Parse(parts[1]));
         }
 
-        public override bool Equals(object obj)
+        //Operatore == --> ATTENZIONE PERCHE' C'E' BISOGNO ANCHE DEL =!
+        public static bool operator==(Fraction f1, Fraction f2)
         {
-            return obj is Fraction fraction &&
-                   N == fraction.N &&
-                   D == fraction.D;
+            if(object.ReferenceEquals(f1,null))
+            {
+                if (object.ReferenceEquals(f2, null))
+                    return true;
+                return false;
+            }
+            if(object.ReferenceEquals(f2, null))
+            {
+                return false;
+            }
+            return f1.N == f2.N && f1.D == f2.D;
+        }
+        public static bool operator !=(Fraction f1, Fraction f2)
+
+        {
+            return !(f1 == f2);
         }
 
         //TryParse
